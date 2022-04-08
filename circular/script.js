@@ -42,7 +42,7 @@
           plotChart(dataArr.map(d => {
             return {
               ...d,
-              Value: d.Value === null ? 0 : d.Value
+              Value: isNaN(d.Value) ? 0 : d.Value
             }
           }));
         });
