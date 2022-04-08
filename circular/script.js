@@ -8,6 +8,15 @@
   let worksheet1, worksheet2;
   // Use the jQuery document ready signal to know when everything has been initialized
   $(document).ready(function () {
+    // return d3.csv("./data.csv", d3.autoType).then(data => {
+    //   plotChart(data.map(d => {
+    //     return {
+    //       ...d,
+    //       Value: d.Value === null ? 0 : d.Value
+    //     }
+    //   }))
+    // });
+
     // Initialize tableau extension
     tableau.extensions.initializeAsync().then(function () {
       // Get worksheets from tableau dashboard
@@ -84,7 +93,6 @@
     const x = d3
       .scaleBand()
       .range([0, 2 * Math.PI]) // X axis goes from 0 to 2pi = all around the circle. If I stop at 1Pi, it will be around a half circle
-      .align(0) // This does nothing
       .domain(data.map((d) => d.Country)); // The domain of the X axis is the list of states.
 
     // Y scale outer variable
