@@ -20,7 +20,7 @@
         worksheet1.getSummaryDataAsync().then((data) => {
           console.log(data);
           let dataJson;
-          
+
           data.data.map((d) => {
             dataJson = {};
             dataJson[data.columns[0].fieldName] = d[0].value; //1st column
@@ -30,7 +30,12 @@
             dataArr.push(dataJson);
           });
 
-          plotChart(dataArr);
+          plotChart(dataArr.map(d => {
+            return {
+              ...d,
+              Value: d.Value === null ? 0 : d.Value
+            }
+          }));
         });
       }
 
@@ -53,14 +58,6 @@
       }
     });
   });
-
-  function sum(arr) {
-    let count = 0;
-    arr.forEach((element) => {
-      count += parseInt(element["CNT(data-unspsc-codes.csv)"]);
-    });
-    return count;
-  }
 
   // ========================== D3 CHART ===================== //
   function plotChart(data) {
